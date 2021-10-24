@@ -5,5 +5,23 @@
 * 點擊圖片看到餐廳詳細資料
 * 可搜尋餐廳名稱或類別找到想要的餐廳
 # 安裝與執行步驟
-1. 開啟終端機，下載 restaurant_list 資料夾到本地電腦
-    git clone
+1.開啟終端機，下載 restaurant_list 資料夾到本地電腦    
+   
+    git clone https://github.com/catcolor/restaurant_list.git
+
+2.進入 restaurant_list    
+
+    cd restaurant_list
+    
+3.安裝必要套件
+
+    npm install
+    
+4.使用 Node.js執行
+
+    node app.js
+# 開發工具
+* Node.js 14.16.0
+* Express 4.17.1
+* Express-handlebars 5.3.4
+* Boostrap 4.2.1

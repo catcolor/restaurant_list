@@ -18,6 +18,10 @@ db.once('open', () => {
       category: index[i].category,
       image: index[i].image,
       rating: index[i].rating,
+      location: index[i].location,
+      phone: index[i].phone,
+      google_map: index[i].google_map,
+      description: index[i].description
     })
   }
   console.log('done')

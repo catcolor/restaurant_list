@@ -12,6 +12,7 @@ const exphbs = require('express-handlebars')
 const restaurantList = require('./restaurant.json')
 
 const Restaurant = require('./models/restaurant')
+const restaurant = require('./models/restaurant')
 
 db.on('error', () => {
   console.log('mongodb error!')
@@ -33,6 +34,10 @@ app.get('/', (req, res) => {
     .catch(error => console.error(error))
 })
 
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
+})
+
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
   const restaurants = restaurantList.results.filter(restaurant => {
@@ -42,9 +47,12 @@ app.get('/search', (req, res) => {
   res.render('index', { restaurant: restaurants, keyword: keyword })
 })
 
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('show', { restaurant: restaurant })
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('show', { restaurant }))
+    .catch(error => console.log(error))
 })
 
 app.listen(port, () => {

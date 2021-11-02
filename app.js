@@ -42,12 +42,17 @@ app.get('/restaurants/new', (req, res) => {
 app.post('/restaurants', (req, res) => {
   const name = req.body.name
   const category = req.body.category
-  // const location = req.body.location
-  // const phone = req.body.phone
-  // const description = req.body.description
+  const location = req.body.location
+  const phone = req.body.phone
+  const description = req.body.description
+  const image = req.body.image
   return Restaurant.create({
-    name: name,
-    category: category,
+    name,
+    category,
+    location,
+    phone,
+    description,
+    image
   })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
@@ -85,6 +90,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
   const location = req.body.location
   const phone = req.body.phone
   const description = req.body.description
+  const image = req.body.image
   return Restaurant.findById(id)
     .then(restaurant => {
       restaurant.name = name
@@ -92,6 +98,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
       restaurant.location = location
       restaurant.phone = phone
       restaurant.description = description
+      restaurant.image = image
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))

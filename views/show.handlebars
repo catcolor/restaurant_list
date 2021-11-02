@@ -38,10 +38,9 @@
         style="max-width: 600px;">
     </div>
     <a class="btn btn-link" href="/" role="button">Back</a>
-
+    <a class="btn btn-link" href="./restaurants/{{ restaurant._id }}/edit" role="button">Edit</a>
     <form action="/restaurants/{{ restaurant._id }}/delete" method="POST" style="display: inline;">
       <button type="submit" class="btn btn-danger">Delete</button>
-
     </form>
   </div>
 </div>

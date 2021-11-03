@@ -1,7 +1,7 @@
 <h1 class="mb-1 restaurant-show-title">{{restaurant.name}}</h1>
 <div class="container">
   <div class="row">
-    <div class="col-12 col-md-10 mx-auto">
+    <div class="col-12 col-md-10 mx-auto mb-4">
 
       <p class="mb-1">
         <span class="text-secondary">
@@ -37,10 +37,14 @@
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}"
         style="max-width: 600px;">
     </div>
-    <a class="btn btn-link" href="/" role="button">Back</a>
-    <a class="btn btn-link" href="./restaurants/{{ restaurant._id }}/edit" role="button">Edit</a>
-    <form action="/restaurants/{{ restaurant._id }}/delete" method="POST" style="display: inline;">
-      <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
+
+    <div class="d-flex justify-content-end">
+      <a class="btn btn-link" href="/" role="button">Back</a>
+      <a class="btn btn-link" href="/restaurants/{{ restaurant._id }}/edit" role="button">Edit</a>
+      <form action="/restaurants/{{ restaurant._id }}/delete" method="POST" style="display: inline;">
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+
   </div>
 </div>

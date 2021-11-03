@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 const methodOverride = require("method-override")
 
 const Restaurant = require('./models/restaurant')
-const restaurant = require('./models/restaurant')
 
 const app = express()
 const port = 3000
@@ -40,12 +39,14 @@ app.get('/restaurants/new', (req, res) => {
 })
 
 app.post('/restaurants', (req, res) => {
-  const name = req.body.name
-  const category = req.body.category
-  const location = req.body.location
-  const phone = req.body.phone
-  const description = req.body.description
-  const image = req.body.image
+  const {
+    name,
+    category,
+    location,
+    phone,
+    description,
+    image
+  } = req.body
   return Restaurant.create({
     name,
     category,
@@ -88,12 +89,15 @@ app.get('/restaurants/:id/edit', (req, res) => {
 
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
-  const name = req.body.name
-  const category = req.body.category
-  const location = req.body.location
-  const phone = req.body.phone
-  const description = req.body.description
-  const image = req.body.image
+  const {
+    name,
+    category,
+    location,
+    phone,
+    description,
+    image
+  } = req.body
+
   return Restaurant.findById(id)
     .then(restaurant => {
       restaurant.name = name

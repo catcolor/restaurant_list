@@ -20,11 +20,15 @@
 
     npm install
     
-4.使用 Node.js執行
+4.安裝種子資料
 
-    node app.js
+    npm run seed
+  
+5.執行
+
+    npm run dev
     
-5.輸入網址 http://localhost:3000/    
+6.輸入網址 http://localhost:3000/    
 # 開發工具
 * Node.js 14.16.0
 * Express 4.17.1

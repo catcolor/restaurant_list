@@ -148,7 +148,13 @@ app.post('/restaurants/:id/edit', (req, res) => {
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
-    .catch(error => console.log(error))
+    .catch(error => {
+      console.error(error)
+      res.render(
+        'errorPage',
+        { status: 500, error: err.message }
+      )
+    })
 })
 
 app.post('/restaurants/:id/delete', (req, res) => {

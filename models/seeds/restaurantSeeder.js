@@ -12,23 +12,11 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongodb connected')
   const index = restaurantSeed.results
-  // for (let i = 0; i < 8; i++) {
-  //   Restaurant.create({
-  //     name: index[i].name,
-  //     category: index[i].category,
-  //     image: index[i].image,
-  //     rating: index[i].rating,
-  //     location: index[i].location,
-  //     phone: index[i].phone,
-  //     google_map: index[i].google_map,
-  //     description: index[i].description
-  //   })
-  // }
-  // console.log('done')
   Restaurant.create(index)
     .then(() => {
       console.log("restaurantSeeder done!")
       db.close()
     })
     .catch(err => console.log(err))
+    .finally(() => process.exit())
 })

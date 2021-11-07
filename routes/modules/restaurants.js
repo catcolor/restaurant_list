@@ -28,8 +28,8 @@ router.post('/', (req, res) => {
     google_map
   })
     .then(() => res.redirect('/'))
-    .catch(error => {
-      console.error(error)
+    .catch(err => {
+      console.log(err)
       res.render(
         'errorPage',
         { status: 500, error: err.message }
@@ -42,8 +42,8 @@ router.get('/:id', (req, res) => {
   return Restaurant.findById(id)
     .lean()
     .then(restaurant => res.render('show', { restaurant }))
-    .catch(error => {
-      console.error(error)
+    .catch(err => {
+      console.log(err)
       res.render(
         'errorPage',
         { status: 500, error: err.message }
@@ -56,8 +56,8 @@ router.get('/:id/edit', (req, res) => {
   return Restaurant.findById(id)
     .lean()
     .then(restaurant => res.render('edit', { restaurant }))
-    .catch(error => {
-      console.error(error)
+    .catch(err => {
+      console.log(err)
       res.render(
         'errorPage',
         { status: 500, error: err.message }
@@ -91,8 +91,8 @@ router.put('/:id', (req, res) => {
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
-    .catch(error => {
-      console.error(error)
+    .catch(err => {
+      console.log(err)
       res.render(
         'errorPage',
         { status: 500, error: err.message }
@@ -105,8 +105,8 @@ router.delete('/:id', (req, res) => {
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
-    .catch(error => {
-      console.error(error)
+    .catch(err => {
+      console.log(err)
       res.render(
         'errorPage',
         { status: 500, error: err.message }

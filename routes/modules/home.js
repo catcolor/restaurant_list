@@ -20,8 +20,8 @@ router.get('/', (req, res) => {
     .lean()
     .sort(sortOrder)
     .then(restaurants => res.render('index', { restaurants }))
-    .catch(error => {
-      console.error(error)
+    .catch(err => {
+      console.log(err)
       res.render(
         'errorPage',
         { status: 500, error: err.message }
@@ -45,8 +45,8 @@ router.get('/search', (req, res) => {
         data.category.toLowerCase().includes(keyword))
       res.render('index', { restaurants: filterrestaurants, keyword })
     })
-    .catch(error => {
-      console.error(error)
+    .catch(err => {
+      console.log(err)
       res.render(
         'errorPage',
         { status: 500, error: err.message }

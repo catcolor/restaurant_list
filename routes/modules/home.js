@@ -4,21 +4,8 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
 router.get('/', (req, res) => {
-  const { name, sort } = req.query
-
-  let sortOrder = { _id: 'asc' }
-
-  if (name === 'name') {
-    sortOrder = { name: `${sort}` }
-  } else if (name === 'category') {
-    sortOrder = { category: `${sort}` }
-  } else if (name === 'location') {
-    sortOrder = { location: `${sort}` }
-  }
-
   Restaurant.find()
     .lean()
-    .sort(sortOrder)
     .then(restaurants => res.render('index', { restaurants }))
     .catch(err => {
       console.log(err)
@@ -31,8 +18,8 @@ router.get('/', (req, res) => {
 
 router.get('/search', (req, res) => {
 
-  const keyword = req.query.keyword.trim().toLowerCase()
-  const keywords = req.query.keyword
+  const keyword = req.query.keyword ? req.query.keyword : ''
+
   const { name, sort } = req.query
 
   let sortOrder = { _id: 'asc' }
@@ -45,14 +32,12 @@ router.get('/search', (req, res) => {
     sortOrder = { location: `${sort}` }
   }
 
-  return Restaurant.find()
+  Restaurant.find({ $or: [{ name: new RegExp(keyword, 'i') }, { category: new RegExp(keyword, 'i') }] })
     .lean()
     .sort(sortOrder)
-    .then(restaurants => {
-      const filterrestaurants = restaurants.filter(data => data.name.toLowerCase().includes(keyword) ||
-        data.category.toLowerCase().includes(keyword))
-      res.render('index', { restaurants: filterrestaurants, keyword })
-    })
+    .then(restaurants =>
+      res.render('index', { restaurants, keyword })
+    )
     .catch(err => {
       console.log(err)
       res.render(

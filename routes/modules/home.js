@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/search', (req, res) => {
-
+  const userId = req.user._id
   const keyword = req.query.keyword ? req.query.keyword : ''
 
   const { name, sort } = req.query
@@ -33,7 +33,7 @@ router.get('/search', (req, res) => {
     sortOrder = { location: `${sort}` }
   }
 
-  Restaurant.find({ $or: [{ name: new RegExp(keyword, 'i') }, { category: new RegExp(keyword, 'i') }] })
+  Restaurant.find({ $or: [{ name: new RegExp(keyword, 'i') }, { category: new RegExp(keyword, 'i') }], userId })
     .lean()
     .sort(sortOrder)
     .then(restaurants =>

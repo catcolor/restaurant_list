@@ -83,7 +83,7 @@ router.put('/:id', (req, res) => {
     google_map
   } = req.body
 
-  return Restaurant.findById(id)
+  return Restaurant.findOne({ _id, userId })
     .then(restaurant => {
       restaurant.name = name
       restaurant.category = category
